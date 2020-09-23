@@ -3,54 +3,307 @@
 \chapter{Methodology}
 \label{ch:methodology}
 
-\textit{Some intro..}
+\textit{Court cases can be structured as legal arguments between the plantiffs, defendants and the Court. The arguments that stand in the end can be said to be the winning argument. In this study we will structure the cases into such arguments and evalute them in PROLOG.}
 
-\section{System Overview}
+\section{Flota Mercante Dominicana v American Manufactureres Mutual Insurance Company}
+% FACTS -----------------------------------------------------------------------------------
 
-Some text .. Algorithm \ref{lame-algorithm} is just a pseudocode.
+\newcommand{\factOne}{Plaintiff was the owner of the SS SANTO DOMINGO which burned and sank in the harbor of Santo Domingo, Dominican Republic, following shelling by members of the U.S. Armed Forces on May 4 and 5, 1965.}
 
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-\renewcommand{\algorithmicforall}{\textbf{for each}}
-\begin{algorithm}
-\caption{Lame Algorithm}
-\label{lame-algorithm}
-\begin{algorithmic}
-  \REQUIRE $B$: set of all current blobs
-  \REQUIRE $T$: set of all current tracks
-  \REQUIRE $M$: merged track association matrix
-  \ENSURE $\widetilde{T}$: set of all revised tracks
-  \ENSURE $\widetilde{M}$: revised merged track association matrix
-  \STATE $\widetilde{T} \gets \emptyset$; $\widetilde{M} \gets \emptyset$; $L \gets \emptyset$
-%  \STATE \COMMENT{Construct an overlap area matrix between the bounding box of blobs and tracks.}
-  \STATE $A \gets \textsc{Get-Overlap-Area-Matrix}(B, T)$
-  \FORALL{$t \in T$}
-    \STATE \textbf{if} $t$ is marked as processed \textbf{then} continue
-    \STATE $B' \gets \{ b' \mid A(b', t) > 0 \}$ \COMMENT{$B'$ contains candidate blobs for track $t$.}
-    \STATE $T' \gets \{ t \} \cup \{ t' \mid M(t, t') = 1 \}$ \COMMENT{$T'$ contains all tracks currently merged with $t$.}
-    \IF{$|B'| \geq 1$}
-      \FORALL{$t' \in T'$}
-        \STATE Let $b = \displaystyle\argmax_{b' \in B'} S(b', t')$
-        \STATE $L \gets L \cup \{ (t', b) \}$
-        \STATE $\textsc{Mark-Track-As-Processed}(t')$
-      \ENDFOR
-    \ENDIF
-  \ENDFOR
-  \FORALL{$(t_i, t_j) \in T \times T$}
-    %\STATE \COMMENT{If track $t_i$ links to the same blob $b$ as track $t_j$}
-    \STATE If $\exists b$ s.t.\ $(t_i, b) \in L \wedge (t_j, b) \in L, \widetilde{M}_{ij} \gets 1$, otherwise $\widetilde{M}_{ij} \gets 0$
-  \ENDFOR
-  \STATE $T^* \gets \{ t^* \mid \neg\exists b \in B \;\text{s.t.}\; (t^*,b) \in L \}$ \COMMENT{$T^*$ contains tracks for which ``stale count'' will be increased.}
-  \STATE $\widetilde{T} \gets \textsc{Update-Or-Delete-Stale-Tracks}(T,T^*)$
-  \STATE $B^* \gets \{ b^* \mid \neg \exists t \in T \;\text{s.t.}\; (t, b^*) \in L \}$ \COMMENT{$B^*$ contains blobs with no tracks assigned.}
-  \STATE $\widetilde{T} \gets\textsc{Add-New-Tracks-For-Not-Linked-Blobs}(\widetilde{T},B^*)$
-\end{algorithmic}
-\end{algorithm}
+\newcommand{\factTwo}{On April 24, 1965, the vessel cleared New York bound for Santo Domingo. The same day the news of the uprising in the Dominican Republic reached the ship}
 
-\section{System Design}
+\newcommand{\factThree}{According to the testimony of the ship’s captain, the broadcasts were greeted with nervous excitement by the crew. There was considerable drinking of alcoholic beverages, much hanging about the radio operator’s quarters and a general loosening of the crew’s discipline. A couple of days out of Santo Domingo, a deputation led by the first cook waited on the captain and persuaded him to permit transmission of a message sympathetic to the new constitution.}
 
-\subsection{Design A}
+\newcommand{\factFour}{On approaching the harbor of Santo Domingo, the captain held a meeting of the officers to discuss the question of putting into the harbor. The captain’s orders on leaving New York were to proceed to Santo Domingo, and he had received no change in those orders. He had had previous experience with navigating during revolutions, coups and uprisings in the Dominican Republic, none of which had resulted in seriously damaging consequences. Moreover, the atmosphere on ship was tense (the captain slept with a hand gun beneath his pillow), and the crew had made it clear by their behavior that they wished to enter Santo Domingo. In these circumstances, it was decided to enter the port.}
 
-Some text ..
+\newcommand{\factFive}{The ship went into Santo Domingo on April 29 and tied up in the Ozama River about 200 meters from a fort then in the hands of National Police loyal to the regime which had been in power when the troubles broke out. The captain gave both crew and passengers instructions to remain on the ship while he went ashore to investigate the situation. The captain attempted to get in touch with the owners of the vessel and to ascertain the conditions in the town. He quickly discovered that he was in the center of a battlefield and he was unable to return to the ship. }
+
+\newcommand{\factSix}{It is unclear what the crew and passengers did to care for themselves, but the succeeding events suggest that within the next several hours each sought safety or excitement with the army of his choice. }
+
+\newcommand{\factSeven}{The next day the forces in the fort next to the ship, roughly 1,000 National Police, came under heavy pressure from the new constitutionalists, who appear to have taken command of those parts of the city lying on the side of the fort away from the river. Further, the National Police in the fort had had nothing to eat for three days. An evacuation of the fort was ordered. Four to five hundred of the retreating police went aboard the SS SANTO DOMINGO, which apparently was empty at that time, seeking refuge, food and modes of escape from the opposing forces. An unsuccessful attempt was made to release the ship from her moorings (by firing machine gun volleys at the cables), a couple of the lifeboats were used to ferry the troops across the Ozama River and whatever food and clothes were found aboard were taken. Within the space of several hours, the ship was abandoned by the retreating police forces.}
+
+\newcommand{\factEight}{The vessel was then rapidly occupied by the rebel forces. The new occupants of the ship used it to direct fire at elements of the 82nd Airborne Division which had been sent to the Dominican Republic under the executive order of President Johnson to protect American nationals and had taken up positions on the other side of the Ozama River. There were exchanges between the American and Dominican rebel forces which came to an end when the Americans resorted to the use of 106 mm explosive shells. Hits by two of these shells on May 4th and 5th caused the ship to burn and sink so that she became a constructive total loss.}
+%\FACTS -----------------------------------------------------------------------------------
+
+% \subsection{Introduction}
+% TODO: describe the case. \cite{prati03shadow}
+
+\subsection{Facts}
+
+%     \begin{center}
+%         \begin{tabular}{ | c | m{13cm} | } 
+%             \hline
+%                 ID & Case Text \\ 
+%             \hline 
+%             \hline 
+%                 F1 & \factOne \\ 
+%             \hline 
+%                 F2 & \factTwo \\ 
+%             \hline 
+%                 F3 & \factThree \\ 
+%             \hline 
+%                 F4 & \factFour \\ 
+%             \hline 
+%                 F5 & \factFive \\ 
+%             \hline 
+%         \end{tabular}
+        
+%         \begin{tabular}{ | c | m{13cm} | } 
+%             \hline 
+%                 F6 & \factSix  \\ 
+%             \hline 
+%                 F7 & \factSeven \\ 
+%             \hline 
+%                 F8 & \factEight \\ 
+%             \hline 
+%         \end{tabular}
+%     \end{center}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=5in]{figures/story.png}
+  \caption[Timeline of events]{\small timeline of the events that led to the sinking of the ship.}
+  \label{fig:monitoring-test}
+\end{figure}
+    
+% RULES -----------------------------------------------------------------------------------
+\newcommand{\warRiskPolicy}{- case text  for the war risk policy -}
+\newcommand{\hullPolicy}{- case text  for the hull policy -}
+\newcommand{\freeOfCaptureAndSeizureClause}{free of capture and seizure clause}
+\newcommand{\freeOfCaptureAndSeizureClauseDefinition}{a clause in ocean marine policies that essentially functions to delete war risk coverage from hull insurance. Losses excluded are those due to nuclear weapons, mines, torpedoes, war (including civil war), piracy, and confiscation or nationalization of property.}
+
+\newcommand{\ruleOne}{In order to achieve some degree of certainty in assigning liability, admiralty courts have relied on the \textbf{maxim of causa próxima non remota spectatur}
+and when interpreting the notion of proximate cause in marine insurance cases have
+tended to apply it stringently. Standard Oil Co. of New Jersey v. United States, 340
+U.S. 54, 58, 71 S. Ct. 135, 95 L.Ed. 68 (1950), Lanasa Fruit Steamship \& Importing Co.
+v. Universal Ins. Co., 302 U.S. 556, 562, 58 S.Ct. 371, 82 L.Ed. 422 (1938). 2 Arnould on
+Marine Insurance (13th ed., Chorley, 1950) § 785. \textbf{Thus, searching backward from the
+caused event for the proximate cause, the courts have sought out the first cause
+from which the event flows in a natural, almost mechanical and inevitable manner;
+what has been called “the real efficient cause of the loss.”} Lanasa Fruit, supra, at
+572, 58 S. Ct. at 378.1 This canon of stringent construction is helpful in assigning
+liability and in providing a measure of predictability by which shipowners and
+underwriters can measure risk and set rates. Yet, \textbf{ultimately the courts must employ
+the fallible judgments of common sense in deciding which strand in the net of
+causation is the proximate cause of the accident.}
+}
+\newcommand{\ruleOneDefinition}{Causa proxima, non remota spectator is a Latin phrase which literally translates into ‘the immediate and not the remote cause are to be considered.’ Whenever the cause of any act or circumstance is need to be understood the immediate cause needs to be looked at and not the remote cause. This maxim of causation is applicable for both marine and general insurance. It is the law which gives emphasis to the immediate cause and not the remote occurrence of events.}
+
+% to define requisition
+\newcommand{\ruleTwo}{Oppenheim’s International Law (7th ed., Lauterpacht, 1955) § 147. Article LII of the
+Second Hague Conventions signed by both the U.S. and the Dominican Republic
+lays out rules for the making of requisitions: that they shall be made only by the
+commander in the locality and shall be paid for as far as possible in cash or a receipt
+given. 2 Treaties, Conventions, International Acts, Protocols and Agreements
+between the U.S. and Other Powers 1776-1909, 2220, 2289.
+}
+\newcommand{\ruleTwoDefinition}{}
+
+\newcommand{\ruleThree}{Contra proferentem}
+\newcommand{\ruleThreeDefinition}{if there is any doubt about the meaning or scope of an exclusion clause, the ambiguity should be resolved against the party seeking to rely on the exclusion clause. It is the other party who is given the benefit of the doubt.}
+
+% For the delay in payment
+\newcommand{\ruleFour}{The parties should be put in the position
+they would have occupied had timely payment of the disputed sum been
+made. Louisiana \& Arkansas R. R. Co. v. Export Drum Co., 359 F.2d 311, 317 (5th Cir.
+1966), United States v. Eastern Air Lines, Inc., 366 F.2d 316, 321 (2d Cir. 1966), R. P.
+Farnsworth \& Co. v. New York Central Float 66, 64 Ad. 823 (S.D.N.Y. July 28, 1969). }
+
+%\RULES -----------------------------------------------------------------------------------
+
+% \subsection{Analysis}
+
+% TODO: Simplify the analysis
+
+% \subsubsection{Finding the proximate cause}
+
+% In order to assign liability under either the general hull insurance or the war risk
+% policy, this court must find the proximate cause of the loss of the ship and then
+% determine whether that cause fell within any of the exceptions of the policy involved.
+% In order to achieve some degree of certainty in assigning liability,
+% admiralty courts have relied on the maxim of causa próxima non remota spectatur
+% and when interpreting the notion of proximate cause in marine insurance cases have
+% tended to apply it stringently. Standard Oil Co. of New Jersey v. United States, 340
+% U.S. 54, 58, 71 S. Ct. 135, 95 L.Ed. 68 (1950), Lanasa Fruit Steamship & Importing Co.
+% v. Universal Ins. Co., 302 U.S. 556, 562, 58 S.Ct. 371, 82 L.Ed. 422 (1938). 2 Arnould on
+% Marine Insurance (13th ed., Chorley, 1950) § 785. Thus, searching backward from the
+% caused event for the proximate cause, the courts have sought out the first cause
+% from which the event flows in a natural, almost mechanical and inevitable manner;
+% what has been called “the real efficient cause of the loss.” Lanasa Fruit, supra, at
+% 572, 58 S. Ct. at 378.
+% This canon of stringent construction is helpful in assigning
+% liability and in providing a measure of predictability by which shipowners and
+% underwriters can measure risk and set rates. Yet, ultimately the courts must employ
+% the fallible judgments of common sense in deciding which strand in the net of
+% causation is the proximate cause of the accident.
+
+% \subsubsection{Resolving ambiguous terms in the policy}
+
+% Finally, the canon of construction which directs one to construe the ambiguities of a
+% contract against the writer of the contract indicates that one should resolve the
+% uncertainty of the meaning of “requisition” against AMMI and find that "requisition”
+% in this policy means something much closer to formal civil condemnation than a
+% swift rummage through the ship by four hundred or more hungry, frightened
+% policemen who made cf. with the food and lifeboats and some of the goods. Neither
+% «party has produced significant evidence of other meaning that would lead me to
+% ignore the contra proferentem canon.
+
+
+% CLAIMS -----------------------------------------------------------------------------------
+\newcommand{\claimOne}{Plaintiff first sued American Manufacturers Mutual Insurance Co. (“AMMI”) to collect under a war risk policy insuring the ship}
+\newcommand{\claimOneDefinition}{Plaintiff sued AMMI to collect under the war risk policy (R1)}
+
+\newcommand{\claimTwo}{In the face of these defenses, plaintiff filed a second action, consolidated with the first for trial which took place before the court on February 9, 1970, against the syndicate of hull underwriters, claiming payment under the hull policy if the proximate cause of the loss should be found to be the barratry of the master and crew or any other cause not excluded by the policy’s free of capture and seizure clause.}
+\newcommand{\claimTwoDefinition}{In response to DA1, DA2 and DA3; The plaintiff filed a second action against the hull underwriters claiming payment under the Hull Policy, if the loss falls under exceptions of the War Risk Policy.}
+%\CLAIMS -----------------------------------------------------------------------------------
+
+\newpage
+\subsection{Claims}
+    \begin{center}
+        \begin{tabular}{ | c | m{8cm} | m{5cm} | } 
+            \hline
+                ID & Case Text & Description \\ 
+            \hline 
+            \hline 
+                C1 & \claimOne & \claimOneDefinition \\ 
+            \hline 
+                C2 & \claimTwo &  \claimTwoDefinition\\ 
+            \hline 
+        \end{tabular}
+    \end{center}
+
+% Arguments -----------------------------------------------------------------------------------
+\newcommand{\DefArgOne}{(1) the proximate cause of the sinking was not a war risk but the barratry of the master and crew, a peril covered by the hull underwriters rather than the war risk underwriters; } 
+
+\newcommand{\DefArgTwo}{(2) alternatively, the proximate cause of the loss was a “captive, seizure, arrest, restraint, detainment, preemption, confiscation or requisition” by the Dominican government and that peril is specifically excluded from the war risk policy; }
+
+\newcommand{\DefArgThree}{(3) regardless of the proximate cause of loss, there was a requisition of the ship by the Dominican Republic prior to the loss and, by the terms of the policy, requisition automatically cancelled the war risk insurance.
+
+...
+
+-----------
+
+...
+
+April 30th, the war risk policy was automatically terminated under the terms of a
+clause that cancelled coverage upon requisition of the ship by the country in which
+she was owned or registered, i. e. the Dominican Republic.}
+
+\newcommand{\DefArgFour}{The hull underwriters contend that the proximate cause of the loss of the vessel falls squarely within the exceptions of the free of capture and seizure clause.}
+
+
+
+\newcommand{\CourtArgOne}{ In the circumstances of this case, I find that the proximate cause of the loss In the circumstances of this case, I find that the proximate cause of the loss certainly lies no further back than the occupation of the ship by the new constitutionalist or rebel party. The decision of the rebel forces to fire on the Americans was the immediate cause of the return fire from the Americans which sank the ship. The rebel decision to fire was an independent one, not mechanically or inevitably flowing from what had gone before, but rather a calculated tactical or strategic risk. Neither the alleged barratry of the master and crew nor the actions  of the Dominican government forced forward the actions of the rebels or the Americans in a mechanical or inevitable manner. Thus, the sinking of the ship was proximately caused by the risks of war and AMMI’s contentions that barratry of the master and crew or “capture, seizure, arrest, restraint, detainment, preemption, confiscation or requisition” by the Dominican government (if such indeed took place) proximately caused the loss must be dismissed}
+
+\newcommand{\CourtArgTwo}{the canon of construction which directs one to construe the ambiguities of a
+contract against the writer of the contract indicates that one should resolve the
+uncertainty of the meaning of “requisition” against AMMI and find that "requisition”
+in this policy means something much closer to formal civil condemnation than a
+swift rummage through the ship by four hundred or more hungry, frightened
+policemen who made cf. with the food and lifeboats and some of the goods. Neither
+«party has produced significant evidence of other meaning that would lead me to
+ignore the contra proferentem canon.
+In light of the facts and the foregoing interpretation of the contractual language, I
+find that there was no requisition by the Dominican government and that therefore
+liability for the total constructive loss of the SS. SANTO DOMINGO falls on the war
+risk underwriter, AMMI.}
+
+%\Arguments -----------------------------------------------------------------------------------
+
+\newpage
+\subsection{Arguments}
+
+\subsubsection{Defendant's Arguments}
+    \begin{center}
+        \begin{tabular}{ | c | m{8cm} | m{5cm} | } 
+            \hline
+                ID & Case Text & Description \\ 
+            \hline 
+            \hline 
+                DA1 & \DefArgOne & Attacks C1
+                
+                ---------
+                
+                 Proximate cause was barratry of the master and crew, a peril which is covered by the hull underwriters, not by the war risk underwriters\\ 
+            \hline 
+                DA2 & \DefArgTwo & Attacks C1 
+                
+                ---------
+                
+                The proximate cause of loss was “captive, seizure, arrest, restraint, detainment, preemption, confiscation or requisition” by the Dominican government, which is excluded by the war risk policy\\ 
+            \hline 
+                DA3 & \DefArgThree & Attacks C1
+                
+                ---------
+                
+                Irrespective of proximate cause, the ship was requisitioned before loss occurred, which cancels the war risk insurance.
+                
+                (This argument is in contrast with DA2, which address the case in which the loss occurred directly due to the actions of the Dominican Government)\\ 
+            \hline 
+                DA4 & \DefArgFour & Attacks C2
+                
+                ---------
+                
+                Proximate cause falls under exception R3\\ 
+            \hline 
+        \end{tabular}
+    \end{center}
+    
+\newpage
+
+\subsubsection{Court's Arguments}
+    \begin{center}
+        \begin{tabular}{ | c | m{8cm} | m{5cm} | } 
+            \hline
+                ID & Case Text & Description \\ 
+            \hline 
+            \hline 
+                CA1 & \CourtArgOne & Attacks DA1 and DA2.
+                
+                ---------
+                
+                The barratry of the master and crew (if it existed) nor the actions of the Dominican government forced the actions of the rebel or American forces to start firing at each other. Therefore the sinking of the ship is proximately caused by risks of war \\ 
+            \hline 
+                CA2 & \CourtArgTwo & Attacks DA2 and DA3.
+                
+                ---------
+                
+                The term 'requisition' is not defined properly by either party, therefore the contract must be read in a manner which construes the ambiguities against the party which wrote the contract (in this case, the defendant (AMMI)). 'Requisition' is thus interpreted as a more formal civil condemnation, which does not exist in this case. The policeman simply rummaged through the goods and took some lifeboats, and therefore there is no requisition. Thus, the loss falls under the war risk policy.\\ 
+            \hline 
+        \end{tabular}
+    \end{center}
+    
+    
+    
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=5in]{figures/arguments_claim_1.png}
+  \caption[Arguments for claim 1]{\small arguments for claim 1}
+  \label{fig:monitoring-test}
+\end{figure}
+    
+
+\subsection{Conclusions}
+
+The proximate cause was found to be a war risk since the actions of the crew nor the Dominican government forced the actions of the rebels or the American forces.
+
+Further, since the term 'requisition' is ambiguous, it is interpreted in favour of the plaintiff and the loss is determined not to fall under the exceptions of the War Risk Policy. 
+
+\subsubsection{Why the second claim (C2) under hull policy is not addressed}
+
+From the case text:
+
+``
+The facts of this case are interesting, and the legal problems it presents can be said
+to be comparatively intricate. But extended litigation does not seem the 'most
+inexpensive and effective way of dealing with many of these problems. More than
+ten years ago, Gilmore & Black made a simple suggestion that is much on point here:
+“Where possible, the sound plan is for the assured to place his marine and war risks
+with the same underwriter, so that the question which sort of risk has caused his
+loss can have no practical importance.” Gilmore & Black, The Law of Admiralty, § 2-
+11 (1957).
+``
+
+
 
 \FloatBarrier
